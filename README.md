@@ -1,44 +1,57 @@
-# Proyek Website Sederhana Data Steam
-Website ini adalah sebuah aplikasi web sederhana yang menampilkan data dari Steam API.
+# Steam Profile Showcase
 
-## Memulai Proyek
-Untuk menjalankan proyek ini di lingkungan lokal Anda, ikuti langkah-langkah berikut:
-1.Instal Dependensi:
-Gunakan salah satu perintah berikut untuk menginstal semua dependensi yang dibutuhkan:
+Tampilan profil Steam yang dibangun dengan Next.js 15 dan Tailwind CSS. Aplikasi ini mengambil data profil, koleksi gim, dan achievement langsung dari Steam API. Jika API tidak tersedia, data contoh tetap ditampilkan sehingga halaman selalu informatif.
 
-```bash
-npm install
-# atau
-yarn install
-# atau
-pnpm install
-# atau
-bun install
-```
+## Fitur
+- **Statistik profil**: ringkasan jumlah gim, total achievement, dan estimasi jam bermain.
+- **Kartu gim teratas**: menampilkan gim favorit lengkap dengan 3 achievement terbaik dan waktu bermain.
+- **Bio & ajakan berteman**: profil singkat serta tombol untuk langsung membuka laman Steam.
+- **Fallback data**: konten cadangan otomatis ditampilkan bila API key atau koneksi jaringan belum tersedia.
+- **Desain responsif**: tata letak adaptif untuk mobile hingga desktop dengan gaya glassmorphism yang ringan.
 
-2.Jalankan Server Pengembangan:
-Setelah dependensi terinstal, jalankan aplikasi dalam mode pengembangan dengan salah satu perintah berikut:
+## Prasyarat
+- Node.js 20 atau lebih baru.
+- Akun Steam dengan **Steam API Key** aktif.
+- **Steam ID 64** milik pengguna yang ingin ditampilkan.
+
+## Konfigurasi Lingkungan
+Buat berkas `.env.local` di akar proyek dan isikan:
 
 ```bash
-npm run dev
-# atau
-yarn dev
-# atau
-pnpm dev
-# atau
-bun dev
+STEAM_API_KEY=masukkan_api_key_anda
+STEAM_ID=masukkan_steam_id_anda
 ```
 
-3.Buka di Browser:
-Aplikasi akan berjalan di http://localhost:3000. Buka URL ini di browser favorit Anda.
-Anda bisa mulai mengedit file app/page.js. Perubahan yang Anda simpan akan secara otomatis memperbarui halaman di browser.
+> **Catatan:** Jangan pernah menaruh API key langsung di kode sumber. Aplikasi ini otomatis memakai data contoh bila variabel lingkungan tidak diisi atau Steam API sedang bermasalah.
 
-kamu bisa mulia mengedit `app/page.js` halaman website akan otomatis berubah
+## Menjalankan Secara Lokal
+1. **Instal dependensi**
+   ```bash
+   npm install
+   ```
 
-## Pelajari Lebih Lanjut
-Untuk informasi lebih lanjut tentang Next.js, Anda bisa mengunjungi sumber daya berikut:
+2. **Jalankan pengembangan**
+   ```bash
+   npm run dev
+   ```
+   Buka `http://localhost:3000` untuk melihat hasilnya.
 
-- [Next.js Documentation](https://nextjs.org/docs) - Pelajari tentang fitur dan API Next.js.
-- [Learn Next.js](https://nextjs.org/learn) - Ikuti tutorial interaktif untuk memahami Next.js lebih dalam.
+3. **Build produksi (opsional)**
+   ```bash
+   npm run build
+   npm start
+   ```
 
+## Struktur Proyek
+- `src/app/page.js` – komponen utama yang memuat profil, statistik gim, dan kartu achievement.
+- `src/app/layout.js` – kerangka dasar halaman dan inisialisasi font global.
+- `src/app/globals.css` – gaya global dan import Tailwind CSS.
+- `public/` – aset statis.
+- `next.config.mjs` – konfigurasi Next.js termasuk domain gambar yang diizinkan.
 
+## Catatan Pengembangan
+- Fetching data dilakukan di sisi server dengan penanganan error sehingga halaman tetap ter-render walaupun API gagal.
+- Jumlah gim yang diambil dibatasi agar responsif dan mengurangi latensi. Silakan sesuaikan logika pemilihan gim di `page.js` sesuai kebutuhan.
+- Gunakan `npm run lint` untuk memastikan kode tetap sesuai standar.
+
+Selamat bereksperimen dan semoga halaman profil Anda semakin menarik!
